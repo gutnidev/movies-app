@@ -1,4 +1,11 @@
-# movies-app
+# Vue app: movies-app
+### Demo:
+#### https://gutnivlad.github.io/movies-app/
+
+
+------------
+
+Old Vue learning project
 
 ## Project setup
 ```
@@ -19,6 +26,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
