@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="srroll-modify">
+  <div
+    id="app"
+    class="srroll-modify"
+  >
     <Notification />
     <Loader />
     <PosterBG :poster="poster"/>
