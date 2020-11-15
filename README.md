@@ -1,6 +1,6 @@
 # Vue app: movies-app
 ### Demo:
-#### https://gutnivlad.github.io/movies-app/
+#### https://gutnidev.github.io/movies-app/
 
 
 ------------
