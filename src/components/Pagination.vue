@@ -47,17 +47,20 @@ export default {
 .movies-pagination {
   margin-top: auto;
 }
+
 .movies-pagination >>> .pagination .page-item .page-link {
   background-color: transparent;
   font-size: 12px;
   color: #fff;
   box-shadow: none;
 }
+
 .movies-pagination >>> .pagination .page-item.active .page-link {
   border-color: #ffffff;
   background-color: #ffffff;
   color: black;
 }
+
 .movies-pagination >>> .pagination .page-item.disabled .page-link {
   color: darkgray;
 }

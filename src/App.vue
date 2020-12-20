@@ -1,17 +1,10 @@
 <template>
-  <div
-    id="app"
-    class="srroll-modify"
-  >
+  <div id="app" class="srroll-modify">
     <Notification />
     <Loader />
-    <PosterBG :poster="poster"/>
-    <Header
-      v-on:pageChanged="onPageChanged"
-    />
+    <PosterBG />
+    <Header v-on:pageChanged="onPageChanged" />
     <MoviesList
-      :list="moviesList"
-      v-on:changePoster="onChangePoster"
       :list-type="'IMDB Top 250'"
     />
     <Pagination
@@ -29,7 +22,7 @@
 import { mapGetters, mapActions } from 'vuex';
 
 // components
-import MoviesList from '@/components/MoviesList.vue';
+import MoviesList from '@/components/listComponents/MoviesList.vue';
 import PosterBG from '@/components/PosterBG.vue';
 import Pagination from '@/components/Pagination.vue';
 import Loader from '@/components/Loader.vue';
@@ -46,8 +39,6 @@ export default {
     Header,
     Notification,
   },
-  created() {
-  },
   mounted() {
     document.body.classList.add('srroll-modify');
   },
@@ -56,15 +47,17 @@ export default {
   }),
   methods: {
     ...mapActions('movies', ['changeCurrentPage']),
-    onChangePoster(poster) {
-      this.poster = poster;
-    },
+
     onPageChanged(page) {
       this.$router.push(`?page=${page}`);
     },
   },
   computed: {
-    ...mapGetters('movies', ['moviesList', 'moviesCurrentPage', 'moviesPerPage', 'moviesTotal', 'getFavouriteMovies']),
+    ...mapGetters('movies', [
+      'moviesCurrentPage',
+      'moviesPerPage',
+      'moviesTotal',
+    ]),
   },
   watch: {
     '$route.query': {
@@ -82,6 +75,7 @@ export default {
 html {
   position: relative;
 }
+
 #app {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -90,27 +84,26 @@ html {
   display: flex;
   flex-direction: column;
 }
-.srroll-modify::-webkit-scrollbar-track
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
-  background-color: #CCCCCC;
+
+.srroll-modify::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
+  background-color: #cccccc;
 }
 
-.srroll-modify::-webkit-scrollbar
-{
+.srroll-modify::-webkit-scrollbar {
   width: 10px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
-.srroll-modify::-webkit-scrollbar-thumb
-{
-  background-color: #FFF;
-  background-image: -webkit-linear-gradient(90deg,
+.srroll-modify::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(
+    90deg,
     rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 1) 25%,
     transparent 100%,
     rgba(0, 0, 0, 1) 75%,
-    transparent)
+    transparent
+  );
 }
-
 </style>

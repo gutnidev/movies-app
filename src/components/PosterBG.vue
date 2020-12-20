@@ -6,25 +6,24 @@
 </template>
 
 <script>
+
+// store
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'PosterBG',
-  props: {
-    poster: {
-      type: String,
-      default: '',
-    },
-  },
   data: () => ({
     defaultPosterBG: 'linear-gradient(45deg, rgb(0, 3, 38) 0%, rgb(82, 15, 117) 100%)',
   }),
   computed: {
+    ...mapGetters('movies', ['getPoster']),
     posterStyle() {
       return {
         'background-image': this.posterBG,
       };
     },
     posterBG() {
-      return this.poster ? `url(${this.poster})` : this.defaultPosterBG;
+      return this.getPoster ? `url(${this.getPoster})` : this.defaultPosterBG;
     },
   },
 };
@@ -42,6 +41,7 @@ export default {
   background-position: center;
   transition: all 0.3s ease;
 }
+
 .poster-page-bg::before {
   content: '';
   position: absolute;

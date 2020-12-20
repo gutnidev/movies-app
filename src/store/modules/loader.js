@@ -1,6 +1,7 @@
 import mutation from '@/store/mutations';
 
 const { SET_LOADER_VALUE } = mutation;
+
 const loaderstore = {
   state: {
     isShowLoader: false,

@@ -18,8 +18,6 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Loader',
-  mounted() {
-  },
   computed: {
     ...mapGetters(['isShowLoader']),
   },

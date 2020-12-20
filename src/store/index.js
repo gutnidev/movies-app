@@ -7,12 +7,9 @@ import notification from '@/store/modules/notification';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
+  mutations: {},
+  actions: {},
   modules: {
     movies,
     loader,

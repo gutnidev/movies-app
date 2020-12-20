@@ -1,37 +1,50 @@
 <template>
-  <b-container fluid="">
-    <b-row class="favourite-item position-relative srroll-modify">
-      <b-icon
-        :icon="favouriteIcon"
-        class="favourites-icon"
-        font-scale="1.5"
-        @click="onFavourites"
-      />
-      <b-col
-        class="favourite-item-poster d-none d-sm-block"
-        cols="2"
-        lg="1"
-        :style="posterBG"
-        @click="onTest"
-      ></b-col>
-      <b-col
-        cols="10"
-        lg="11"
-      >
-        <div class="d-flex flex-column h-100">
-          <h5 class="favourite-item-title p-2">
-            {{ movie.Title }}
-          </h5>
-          <p class="favourite-item-plot mt-auto ">
-            {{ movie.Plot }}
-          </p>
+  <div class="movie-item mb-3">
+    <b-icon
+      :icon="favouriteIcon"
+      class="favourites-icon"
+      font-scale="1.5"
+      @click="onFavourites"
+    />
+    <div
+      class="movie-item-poster"
+      :style="posterBG"
+    >
+    </div>
+    <div class="movie-info-wrap">
+      <div class="movie-item-info">
+        <h3 class="movie-title">{{ movie.Title }}</h3>
+        <span class="movie-year">{{ movie.Year }}</span>
+      </div>
+      <div class="movie-item-controls row no-gutters">
+        <div class="col-12 col-sm-6 pl-0 pr-sm-2 pb-1 pb-sm-1">
+          <BButton
+            size="md"
+            block
+            variant="outline-light"
+            @click="showInfoModalEvent"
+          >
+            Info
+          </BButton>
         </div>
-      </b-col>
-    </b-row>
-  </b-container>
+        <div class="col-12 col-sm-6 pl-0 pl-sm-2 pt-1 pt-sm-0">
+          <BButton
+            size="md"
+            block
+            variant="outline-light"
+            @click="removeItem"
+          >
+            Remove
+          </BButton>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+
+// store
 import { mapActions } from 'vuex';
 
 export default {
@@ -43,31 +56,32 @@ export default {
     },
   },
   data: () => ({
+    // eslint-disable-next-line global-require
+    defaultBackImage: require('@/assets/defaultMovieImage.png'),
   }),
   methods: {
+    // movies actions
     ...mapActions('movies', ['setFavouriteMovie', 'removeFavouriteMovie']),
-    onTest() {
-      console.log(this.movie);
-    },
+    // list
     removeItem() {
       this.$emit('removeItem', {
         id: this.movie.imdbID,
         title: this.movie.Title,
       });
     },
-    showInfoModalEvent() {
-      this.$emit('showInfo', this.movie.imdbID);
-    },
     onFavourites() {
       const id = this.movie.imdbID;
       // eslint-disable-next-line no-unused-expressions
       this.movie.isFavourite ? this.removeFavouriteMovie(id) : this.setFavouriteMovie(id);
     },
+    // modal
+    showInfoModalEvent() {
+      this.$emit('showInfo', this.movie.imdbID);
+    },
   },
   computed: {
     posterBG() {
       return {
-        // todo сделать кэширование поиска по фильмам
         'background-image': `url(${this.movie.Poster})`,
       };
     },
@@ -82,26 +96,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.favourite-item {
-  height: 200px;
-  background-color: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(148, 145, 145, 0.7);
-  overflow-y: auto;
-  margin-bottom: 0.3rem;
-}
-.favourite-item-poster {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-.favourite-item-title{
-  text-align: center;
-  color: white;
-}
-.favourite-item-plot {
-  font-size: 1.2rem;
-  color: #a5a0a0;
-}
 .movie-item {
   position: relative;
   border-radius: 5px;

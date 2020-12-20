@@ -40,8 +40,11 @@
 </template>
 
 <script>
+
+// store
 import { mapActions, mapGetters } from 'vuex';
-import FavouritesList from '@/components/FavouritesList.vue';
+// components
+import FavouritesList from '@/components/listComponents/FavouritesList.vue';
 
 export default {
   name: 'Header',
@@ -53,11 +56,13 @@ export default {
     isVisibleCollapse: false,
   }),
   methods: {
+    // movies actions
     ...mapActions('movies', ['searchMovies', 'fetchMovies', 'setSearchState']),
     onLogoClick() {
       this.$emit('pageChanged', 1);
       this.searchValue = '';
     },
+    // search
     onSearchValueChanged(value) {
       if (!value) {
         this.fetchMovies();
@@ -65,6 +70,7 @@ export default {
         this.searchMovies(value);
       }
     },
+    // header event handlers
     onCollapseClick() {
       if (Object.keys(this.getFavouriteMovies).length) {
         this.isVisibleCollapse = !this.isVisibleCollapse;
@@ -84,23 +90,29 @@ export default {
 </script>
 
 <style scoped>
+
 .logo {
   cursor: pointer;
 }
+
 .header{
   margin-bottom: 30px;
 }
+
 .navbar{
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
+
 .searchInput{
   color: rgba(255, 255, 255, 0.7);
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(0, 0, 0, 0.6);
 }
+
 .searchInput:focus {
   box-shadow: none;background: rgba(255, 255, 255, 0.2);
   border-color: rgba(0, 0, 0, 0.6);
   color: rgba(255, 255, 255, 0.7);
 }
+
 </style>
